@@ -406,6 +406,18 @@ const chalker = (obj, indentLevel = 4, startingDepth = 0, maxDepth = null, verbo
             return;
         }
 
+        if (depth < startingDepth) {
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    const value = obj[key];
+                    if (typeof value === 'object' && value !== null) {
+                        printObj(value, depth + 1, currentIndent);
+                    }
+                }
+            }
+            return;
+        }
+
         const colour = crayolaColours[depth % crayolaColours.length];
         const nextColour = crayolaColours[(depth + 1) % crayolaColours.length];
 
@@ -452,10 +464,12 @@ const chalker = (obj, indentLevel = 4, startingDepth = 0, maxDepth = null, verbo
         console.log(currentIndent + chalk.hex(colour.complimentary)(closeChar));
     };
 
-    printObj(obj, startingDepth, createIndent(startingDepth));
+    printObj(obj, 0, createIndent(startingDepth));
 };
 
 export default chalker;
+
+
 
 
 
