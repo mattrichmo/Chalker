@@ -9,7 +9,7 @@ Recieves an an object as an argument and it will go through and chalk a new colo
 
 which is the result of:
 
-![Example Code](,/assets/exampleCode.png)
+![Example Code](./assets/exampleCode.png)
 
 
 ### Add More Colours
