@@ -368,6 +368,7 @@ const colors = crayolaColours.map(color => chalk.hex(color.hex));
 const bgColors = crayolaColours.map(color => chalk.bgHex(color.hex));
 let colorIndex = 0;
 
+
 // Your crayolaColours array remains the same as you provided
 
 const chalker = (obj, indentLevel = 4, startingDepth = 0, maxDepth = null, verbose = false) => {
@@ -380,13 +381,13 @@ const chalker = (obj, indentLevel = 4, startingDepth = 0, maxDepth = null, verbo
 
     // Helper function to format arrays
     const formatArray = (arr, depth) => {
-        if (verbose || arr.length <= maxArrayLength) {
-            return arr;
-        } else {
-            const hiddenItemCount = arr.length - 10;
-            const hiddenItemIndicator = Array.isArray(arr[0]) ? { hiddenItems: hiddenItemCount } : `...${hiddenItemCount} hidden items...`;
+        let hiddenItemCount = 0;
+        if (!(verbose || arr.length <= maxArrayLength)) {
+            hiddenItemCount = arr.length - maxArrayLength;
+            const hiddenItemIndicator = chalk.dim(`(... ${hiddenItemCount} Hidden Array Items ...)`);
             return [...arr.slice(0, 5), hiddenItemIndicator, ...arr.slice(-5)];
         }
+        return arr;
     };
 
     // Helper function to format strings
@@ -404,26 +405,26 @@ const chalker = (obj, indentLevel = 4, startingDepth = 0, maxDepth = null, verbo
         if (maxDepth !== null && depth > maxDepth) {
             return;
         }
-    
+
         const colour = crayolaColours[depth % crayolaColours.length];
         const nextColour = crayolaColours[(depth + 1) % crayolaColours.length];
-    
+
         const openChar = Array.isArray(obj) ? '[' : '{';
         const closeChar = Array.isArray(obj) ? ']' : '}';
         console.log(currentIndent + chalk.hex(colour.complimentary)(openChar));
-    
+
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 const value = obj[key];
                 const newIndent = currentIndent + ' '.repeat(indentLevel);
-    
+
                 if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
                     console.log(newIndent + chalk.bgHex(nextColour.hex).hex(nextColour.complimentary)(key));
                     printObj(value, depth + 1, newIndent);
                 } else {
                     const formattedKey = chalk.hex(colour.shades.dim.hex)(key);
                     let formattedValue;
-    
+
                     if (typeof value === 'string') {
                         formattedValue = formatString(value, depth);
                     } else if (Array.isArray(value)) {
@@ -433,29 +434,30 @@ const chalker = (obj, indentLevel = 4, startingDepth = 0, maxDepth = null, verbo
                                 return chalk.hex(colour.shades.dim.hex)(`${index}: `) + formatString(item, depth);
                             } else if (typeof item === 'object' && !Array.isArray(item)) {
                                 return chalk.hex(colour.shades.dim.hex)(`${index}: `) + chalk.hex(colour.shades.bright.hex)(JSON.stringify(item));
-                            } else if (typeof item === 'object' && Array.isArray(item)) {
-                                // Hidden items placeholder
-                                return chalk.hex(colour.shades.dim.hex)(`${index}: `) + chalk.hex(colour.complimentary)(JSON.stringify(item));
+                            } else if (item.includes('Hidden Array Items')) {
+                                // Apply dim formatting to hidden items indicator
+                                return newIndent + item;
                             }
                             return chalk.hex(colour.shades.dim.hex)(`${index}: `) + item.toString();
                         }).join('\n' + newIndent);
                     } else {
                         formattedValue = chalk.hex(colour.shades.bright.hex)(value.toString());
                     }
-    
+
                     console.log(newIndent + `${formattedKey}: ${formattedValue}`);
                 }
             }
         }
-    
+
         console.log(currentIndent + chalk.hex(colour.complimentary)(closeChar));
     };
-    
 
     printObj(obj, startingDepth, createIndent(startingDepth));
 };
 
 export default chalker;
+
+
 
 
 
