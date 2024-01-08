@@ -17,9 +17,7 @@ verbose\\ True or False. If true it will print everything. If false (default) it
 Example: 
 
 ```
- chalker(testObject, 4, 0, null, true);
-
-```
+ chalker(testObject, 4, 0, null, true);```
 
 
 ### Example Output
