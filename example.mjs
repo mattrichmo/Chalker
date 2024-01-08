@@ -32,7 +32,11 @@ const testObject = {
                     level4Text: 'Level 4 Text',
                     level4Number: 4,
                     level4Boolean: false,
-                    level4Array: [{key1: 'value1'}, {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'},{key1: 'value1'}, {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'}, {key1: 'value1'}, {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'},  ],
+                    level4Array: [{key1: 'value1'}, 
+                    {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'},
+                    {key1: 'value1'}, {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'}, {key1: 'value1'}, 
+                    {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'},  
+                    {key1: 'value1'}, {key2: 'value2'}, {key3: 'value3'}, {key4: 'value4'}, {key5: 'value5'},],
                 }
             }
         }
