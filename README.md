@@ -4,7 +4,7 @@
 
 
 
-## Rainbow Logger for Your JSON Objects
+## Rainbow Logger for Your JSON Objects - Chalk Add-On
 Recieves an an object as an argument and it will go through and chalk a new colour for each layer. Great for debugging and visualization. 
 
 ### Optional Args
@@ -12,12 +12,16 @@ Recieves an an object as an argument and it will go through and chalk a new colo
 indentNum \\ the indent number 
 startingDepth \\ the starting level to display
 maxDepth \\ the number of levels to print
-verbose\\ True or False. If true it will print everything. If false (default) it was concatenate strings and arrays```
+verbose\\ True or False. If true it will print everything. If false (default) it was concatenate strings and arrays
+```
 
-Example: 
+
+Example:
 
 ```
- chalker(testObject, 4, 0, null, true);```
+chalker(testObject, 4, 0, null, true)
+```
+
 
 
 ### Example Output
@@ -34,7 +38,7 @@ which is the result of:
 
 ### Add More Colours
 
-Colours are all formatted like this:
+Colours are all formatted like this:Example: 
 
 ```
     {
@@ -52,4 +56,7 @@ Colours are all formatted like this:
             },
         }
     },
+
 ```
+
+### [Check Out Chalk](https://github.com/chalk/chalk)
